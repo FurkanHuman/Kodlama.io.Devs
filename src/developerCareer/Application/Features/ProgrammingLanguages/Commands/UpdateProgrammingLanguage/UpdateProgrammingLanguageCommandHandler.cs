@@ -22,11 +22,12 @@ namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLa
 
         public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            ProgrammingLanguage MappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
+            ProgrammingLanguage? ProgrammingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.Id);
 
-            await _programmingLanguageBusinessRules.ProgrammingLanguageAddingBeforeDataBaseControlByName(MappedProgrammingLanguage.Name);
+            _programmingLanguageBusinessRules.ProgrammingLanguageNullCheck(ProgrammingLanguage);
+            await _programmingLanguageBusinessRules.ProgrammingLanguageAddingBeforeDataBaseControlByName(ProgrammingLanguage.Name);
 
-            ProgrammingLanguage updatedPl = await _programmingLanguageRepository.UpdateAsync(MappedProgrammingLanguage);
+            ProgrammingLanguage updatedPl = await _programmingLanguageRepository.UpdateAsync(ProgrammingLanguage);
 
             return _mapper.Map<UpdatedProgrammingLanguageDto>(updatedPl);
         }
