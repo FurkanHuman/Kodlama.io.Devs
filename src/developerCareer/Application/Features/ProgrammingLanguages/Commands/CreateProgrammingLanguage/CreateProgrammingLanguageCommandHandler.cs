@@ -1,9 +1,9 @@
-﻿using Application.Features.ProgrammingLanguages.Rules;
+﻿using Application.Features.ProgrammingLanguages.Dtos;
+using Application.Features.ProgrammingLanguages.Rules;
 using Application.Services.Repositories;
-using Domain.Entities;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
-using Application.Features.ProgrammingLanguages.Dtos;
 
 namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage
 {
@@ -28,6 +28,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLa
             ProgrammingLanguage mappedPl = _mapper.Map<ProgrammingLanguage>(request);
             ProgrammingLanguage createPl = await _programmingLanguageRepository.AddAsync(mappedPl);
 
-            return _mapper.Map<CreatedProgrammingLanguageDto>(createPl);}
+            return _mapper.Map<CreatedProgrammingLanguageDto>(createPl);
+        }
     }
 }

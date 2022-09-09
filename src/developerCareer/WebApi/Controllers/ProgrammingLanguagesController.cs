@@ -8,7 +8,6 @@ using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLangua
 using Core.Application.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Controllers.Base;
 
 namespace WebApi.Controllers
 {

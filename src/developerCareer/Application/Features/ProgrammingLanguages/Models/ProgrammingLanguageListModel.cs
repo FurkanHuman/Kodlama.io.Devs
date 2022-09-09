@@ -1,6 +1,5 @@
 ﻿using Application.Features.ProgrammingLanguages.Dtos;
 using Core.Persistence.Paging;
-using Domain.Entities;
 
 namespace Application.Features.ProgrammingLanguages.Models
 {

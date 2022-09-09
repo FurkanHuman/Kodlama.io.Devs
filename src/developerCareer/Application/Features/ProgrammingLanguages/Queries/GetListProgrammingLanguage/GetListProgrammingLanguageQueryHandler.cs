@@ -21,8 +21,8 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLa
 
         public async Task<ProgrammingLanguageListModel> Handle(GetListProgrammingLanguageQuery request, CancellationToken cancellationToken)
         {
-            
-            IPaginate<ProgrammingLanguage> paginate =await _programmingLanguageRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+
+            IPaginate<ProgrammingLanguage> paginate = await _programmingLanguageRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
             return _mapper.Map<ProgrammingLanguageListModel>(paginate);
 
         }
