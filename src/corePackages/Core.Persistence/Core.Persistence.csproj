@@ -11,4 +11,8 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\developerCareer\Domain\Domain.csproj" />
+  </ItemGroup>
+
 </Project>

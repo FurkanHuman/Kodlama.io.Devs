@@ -1,11 +1,10 @@
-﻿using Core.Persistence.Repositories;
+﻿using Domain.Entities.Abstract;
+using Domain.Entities.Base;
 
 namespace Domain.Entities
 {
-    public class ProgrammingLanguage : IEntity
+    public class ProgrammingLanguage : BaseEntity<int>, IEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
 
         public ProgrammingLanguage() { }
 

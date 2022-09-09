@@ -1,12 +1,10 @@
-﻿using Core.Persistence.Repositories;
+﻿using Domain.Entities.Abstract;
+using Domain.Entities.Base;
 
 namespace Core.Security.Entities;
 
-public class OperationClaim : IEntity
+public class OperationClaim : BaseEntity<int>, IEntity
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-
     public OperationClaim() { }
 
     public OperationClaim(int id, string name)

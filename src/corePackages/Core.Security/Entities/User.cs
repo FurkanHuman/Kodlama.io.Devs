@@ -1,5 +1,5 @@
-﻿using Core.Persistence.Repositories;
-using Core.Security.Enums;
+﻿using Core.Security.Enums;
+using Domain.Entities.Abstract;
 
 namespace Core.Security.Entities;
 
@@ -23,7 +23,7 @@ public class User : IEntity
         RefreshTokens = new HashSet<RefreshToken>();
     }
 
-    public User(Guid id, string firstName, string lastName, string email, 
+    public User(Guid id, string firstName, string lastName, string email,
         byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType)
     {
         Id = id;
