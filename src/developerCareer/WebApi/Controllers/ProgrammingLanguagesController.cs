@@ -6,6 +6,7 @@ using Application.Features.ProgrammingLanguages.Models;
 using Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,16 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
+
+            ProgrammingLanguageListModel programmingLanguageListModel = await _mediator.Send(getListProgrammingLanguageQuery);
+
+            return Ok(programmingLanguageListModel);
+        }
+
+        [HttpPost("GetListByDynamic")]
+        public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+        {
+            GetListProgrammingLanguageByDynamicQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
 
             ProgrammingLanguageListModel programmingLanguageListModel = await _mediator.Send(getListProgrammingLanguageQuery);
 
