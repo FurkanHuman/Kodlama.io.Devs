@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Features.ProgrammingTechnologies.Dtos
+{
+    public class RemovedProgrammingTechnologyDto
+    {
+        public int Id { get; set; }
+
+        public bool IsdeletedState { get; set; } = false;
+
+        public RemovedProgrammingTechnologyDto() { }
+
+        public RemovedProgrammingTechnologyDto(int id)
+        {
+            Id = id;
+        }
+
+        public RemovedProgrammingTechnologyDto(int id, bool ısdeletedState)
+        {
+            Id = id;
+            IsdeletedState = ısdeletedState;
+        }
+    }
+}
