@@ -22,7 +22,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLa
 
         public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
         {
-            ProgrammingLanguage? ProgrammingLanguage = await _programmingLanguageRepository.GetAsync(pl => pl.Id == request.Id);
+            ProgrammingLanguage ProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
 
             _programmingLanguageBusinessRules.ProgrammingLanguageNullCheck(ProgrammingLanguage);
             await _programmingLanguageBusinessRules.ProgrammingLanguageAddingBeforeDataBaseControlByName(ProgrammingLanguage.Name);
