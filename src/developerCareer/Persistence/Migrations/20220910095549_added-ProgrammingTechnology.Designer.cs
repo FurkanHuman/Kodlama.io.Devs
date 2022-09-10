@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -10,9 +11,10 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220910095549_added-ProgrammingTechnology")]
+    partial class addedProgrammingTechnology
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,29 +68,18 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
-                    b.Property<int>("ProgrammingLanguageId")
+                    b.Property<int>("PLId")
                         .HasColumnType("int")
                         .HasColumnName("ProgrammingTechnologiesId");
+
+                    b.Property<int>("ProgrammingLanguageId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProgrammingLanguageId");
 
                     b.ToTable("ProgrammingTechnologies", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "WFP",
-                            ProgrammingLanguageId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Pygame",
-                            ProgrammingLanguageId = 7
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProgrammingTechnology", b =>
