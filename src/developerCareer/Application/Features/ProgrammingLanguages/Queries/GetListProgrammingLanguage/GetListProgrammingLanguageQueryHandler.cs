@@ -9,7 +9,6 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLa
 {
     public class GetListProgrammingLanguageQueryHandler : IRequestHandler<GetListProgrammingLanguageQuery, ProgrammingLanguageListModel>
     {
-
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
 
