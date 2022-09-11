@@ -20,7 +20,7 @@ namespace Application.Features.ProgrammingTechnologies.Commands.RemoveProgrammin
         public async Task<RemovedProgrammingTechnologyDto> Handle(RemoveProgrammingTechnologyCommand request, CancellationToken cancellationToken)
         {
             ProgrammingTechnology? getPT = await _programmingTechnologyRepo.GetAsync(pt => pt.Id == request.Id);
-            await _programmingTechnologyBusinessRules.ProgrammingTechnologyNullCheck(getPT);
+            _programmingTechnologyBusinessRules.ProgrammingTechnologyNullCheck(getPT);
             ProgrammingTechnology deletedPt = await _programmingTechnologyRepo.DeleteAsync(getPT);
 
             return new(deletedPt.Id, true);

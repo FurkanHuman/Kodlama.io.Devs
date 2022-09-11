@@ -24,7 +24,7 @@ namespace Application.Features.ProgrammingTechnologies.Commands.UpdateProgrammin
         {
             ProgrammingTechnology mappedPT = _mapper.Map<ProgrammingTechnology>(request);
             
-            await _technologyBusinessRules.ProgrammingTechnologyNullCheck(mappedPT);
+            _technologyBusinessRules.ProgrammingTechnologyNullCheck(mappedPT);
             await _technologyBusinessRules.ProgrammingTechnologyAddingBeforeDataBaseControlByName(mappedPT.Name);
             await _technologyBusinessRules.ProgrammingLanguageNullCheckById(mappedPT.ProgrammingLanguageId);
 

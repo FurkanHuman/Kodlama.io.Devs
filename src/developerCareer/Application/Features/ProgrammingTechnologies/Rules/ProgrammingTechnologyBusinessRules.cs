@@ -29,7 +29,7 @@ namespace Application.Features.ProgrammingTechnologies.Rules
             if (result.Items.Any()) throw new BusinessException("Programming Technology is Exit.");
         }
 
-        public async Task ProgrammingTechnologyNullCheck(ProgrammingTechnology? programmingTechnology)
+        public void ProgrammingTechnologyNullCheck(ProgrammingTechnology? programmingTechnology)
         {
             if (programmingTechnology==null) throw new BusinessException("Programming Technology is Null."); 
         }
