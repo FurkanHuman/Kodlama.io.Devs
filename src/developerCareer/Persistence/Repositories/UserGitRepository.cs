@@ -5,9 +5,9 @@ using Persistence.Contexts;
 
 namespace Persistence.Repositories
 {
-    public class UserGithubRepository : EfRepositoryBase<UserGithub, BaseDbContext>, IUserGithubRepository
+    public class UserGitRepository : EfRepositoryBase<UserGit, BaseDbContext>, IUserGitRepository
     {
-        public UserGithubRepository(BaseDbContext context) : base(context)
+        public UserGitRepository(BaseDbContext context) : base(context)
         {
         }
     }

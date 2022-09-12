@@ -21,7 +21,7 @@ namespace Persistence.Contexts
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
-        public DbSet<UserGithub> GithubAddresses { get; set; }
+        public DbSet<UserGit> UserGits { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -107,12 +107,12 @@ namespace Persistence.Contexts
                 r.HasOne(i => i.User);
             });
 
-            modelBuilder.Entity<UserGithub>(g =>
+            modelBuilder.Entity<UserGit>(g =>
             {
-                g.ToTable("GithubAddresses").HasKey(i => i.Id);
+                g.ToTable("UserGits").HasKey(i => i.Id);
                 g.Property(g => g.Id).HasColumnName("Id");
                 g.Property(i => i.UserId).HasColumnName("UserId");
-                g.Property(i => i.GithubLink).HasColumnName("GithubLink");
+                g.Property(i => i.GitLink).HasColumnName("GitLink");
 
                 g.HasOne(o => o.User);
             });

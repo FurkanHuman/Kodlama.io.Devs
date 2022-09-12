@@ -1,5 +1,6 @@
 ﻿
 using Application.Features.Auths.Rules;
+using Application.Features.UserGits.Rules;
 using Application.Features.ProgrammingLanguages.Rules;
 using Application.Features.ProgrammingTechnologies.Rules;
 using Core.Application.Pipelines.Validation;
@@ -20,6 +21,8 @@ namespace Application
             services.AddScoped<ProgrammingLanguageBusinessRules>();
             services.AddScoped<ProgrammingTechnologyBusinessRules>();
             services.AddScoped<UserBusinessRules>();
+            services.AddScoped<UserGitBusinessRules>();
+
 
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

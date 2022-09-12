@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Application.Services.Repositories
 {
-    public interface IUserGithubRepository : IAsyncRepository<UserGithub>, IRepository<UserGithub>
+    public interface IUserGitRepository : IAsyncRepository<UserGit>, IRepository<UserGit>
     {
     }
 }
