@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "src\cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "src\corePackages\Core.Persistence\Core.Persistence.csproj", "{9392962B-814F-4994-AA22-9835C59A5CFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "src\corePackages\Core.Domain\Core.Domain.csproj", "{9290FA95-B7FB-4435-943D-2CD2E91246D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{9392962B-814F-4994-AA22-9835C59A5CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9392962B-814F-4994-AA22-9835C59A5CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9392962B-814F-4994-AA22-9835C59A5CFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9290FA95-B7FB-4435-943D-2CD2E91246D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9290FA95-B7FB-4435-943D-2CD2E91246D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9290FA95-B7FB-4435-943D-2CD2E91246D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9290FA95-B7FB-4435-943D-2CD2E91246D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{B70E94D5-5915-479A-BC3D-8BDA5A21E651} = {E699B4C7-96F7-4155-A630-989F98804BCA}
 		{56312DAE-A0D7-4D26-B8EE-3E52D3ACDC5A} = {E699B4C7-96F7-4155-A630-989F98804BCA}
 		{9392962B-814F-4994-AA22-9835C59A5CFD} = {E699B4C7-96F7-4155-A630-989F98804BCA}
+		{9290FA95-B7FB-4435-943D-2CD2E91246D0} = {E699B4C7-96F7-4155-A630-989F98804BCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6C2DCFDB-0803-4FC1-B9B0-0D8560C1A112}

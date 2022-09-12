@@ -1,5 +1,5 @@
-﻿using Core.Persistence.Entity.Abstract;
-using Core.Persistence.Entity.Base;
+﻿using Core.Domain.Abstract;
+using Core.Domain.Base;
 
 namespace Domain.Entities
 {

@@ -1,5 +1,5 @@
-﻿using Core.Persistence.Dynamic;
-using Core.Persistence.Entity.Abstract;
+﻿using Core.Domain.Abstract;
+using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

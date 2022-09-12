@@ -1,4 +1,4 @@
-﻿using Core.Persistence.Entity.Abstract;
+﻿using Core.Domain.Abstract;
 using Core.Security.Entities;
 
 namespace Domain.Entities

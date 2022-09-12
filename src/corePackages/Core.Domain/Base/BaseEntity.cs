@@ -1,4 +1,4 @@
-﻿namespace Core.Persistence.Entity.Base
+﻿namespace Core.Domain.Base
 {
     public class BaseEntity<I> where I : struct
     {
