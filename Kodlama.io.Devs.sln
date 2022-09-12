@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "corePackages", "corePackages", "{E699B4C7-96F7-4155-A630-989F98804BCA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "developerCareer", "developerCareer", "{4D5C4131-DA71-486F-9A80-0FC00B805151}"
-	ProjectSection(SolutionItems) = preProject
-		src\corePackages\Core.Security\SecurityServiceRegistration.cs = src\corePackages\Core.Security\SecurityServiceRegistration.cs
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\developerCareer\Application\Application.csproj", "{FB4C2BE1-B460-434A-8AA7-9544A229FB98}"
 EndProject

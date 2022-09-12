@@ -10,11 +10,6 @@ namespace Application.Features.ProgrammingLanguages.Rules
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageService;
 
-        public ProgrammingLanguageBusinessRules(IProgrammingLanguageRepository programmingLanguageService)
-        {
-            _programmingLanguageService = programmingLanguageService;
-        }
-
         public async Task ProgrammingLanguageAddingBeforeDataBaseControlByName(string name)
         {
             IPaginate<ProgrammingLanguage> result = await _programmingLanguageService.GetListAsync(pl => pl.Name.ToLower() == name.ToLower());

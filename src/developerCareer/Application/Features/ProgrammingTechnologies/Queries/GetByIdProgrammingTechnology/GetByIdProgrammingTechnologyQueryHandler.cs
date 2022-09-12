@@ -27,7 +27,7 @@ namespace Application.Features.ProgrammingTechnologies.Queries.GetByIdProgrammin
         {
             ProgrammingTechnology? getPT = await _programmingTechnologyRepository.GetAsync(pl => pl.Id == request.Id);
 
-           await _programmingTechnologyRules.ProgrammingTechnologyNullCheck(getPT);
+            _programmingTechnologyRules.ProgrammingTechnologyNullCheck(getPT);
 
             return _mapper.Map<ProgrammingTechnologyGetByIdDto>(getPT);
         }
