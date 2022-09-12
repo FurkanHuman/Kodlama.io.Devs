@@ -1,6 +1,6 @@
 ﻿using Core.Persistence.Dynamic;
+using Core.Persistence.Entity.Abstract;
 using Core.Persistence.Paging;
-using Domain.Entities.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;

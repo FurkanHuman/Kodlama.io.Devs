@@ -1,5 +1,5 @@
-﻿using Core.Persistence.Paging;
-using Domain.Entities.Abstract;
+﻿using Core.Persistence.Entity.Abstract;
+using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 

@@ -1,5 +1,5 @@
-﻿using Core.Security.Enums;
-using Domain.Entities.Abstract;
+﻿using Core.Persistence.Entity.Abstract;
+using Core.Security.Enums;
 
 namespace Core.Security.Entities;
 
