@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
-    <Folder Include="Features\ProgrammingTechnologies\UpdateProgrammingTechnology\" />
     <Folder Include="Features\ProgrammingTechnologies\Constants\" />    
   </ItemGroup>
 

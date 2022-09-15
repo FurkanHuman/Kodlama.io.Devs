@@ -29,7 +29,7 @@ namespace Application.Features.Auths.Commands.Register
 
         public async Task<AccessToken> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
         {
-            await _userBusinessRules.UserIsExistByEmail( request.Register.Email);
+            await _userBusinessRules.UserIsExistByEmail(request.Register.Email,cancellationToken);
 
             User mappedUser = _mapper.Map<User>(request.Register);
 
@@ -48,12 +48,7 @@ namespace Application.Features.Auths.Commands.Register
                 OperationClaimId = 2
             });
 
-            IPaginate<UserOperationClaim> userOpClaims = await _userOperationClaimRepo.GetListAsync(op=>
-            op.UserId==registeredUser.Id,
-            include: op=>op.Include(oc=>oc.OperationClaim),
-            cancellationToken:cancellationToken);
-
-            IList<OperationClaim> oPList = userOpClaims.Items.Select(p=>p.OperationClaim).ToList();
+            IList<OperationClaim> oPList = await _userBusinessRules.GetUserOperationClaim(registeredUser, cancellationToken);
 
             return _tokenHelper.CreateToken(registeredUser, oPList);
         }
