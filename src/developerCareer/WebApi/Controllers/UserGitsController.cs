@@ -20,24 +20,24 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("Add")]
-        public async Task<CreatedUserGitDto> Add([FromForm] CreateGitAddressCommand createGitAddress)
+        public async Task<IActionResult> Add([FromForm] CreateGitAddressCommand createGitAddress)
         {
             CreatedUserGitDto result = await _mediator.Send(createGitAddress);
-            return result;
+            return Created("",result);
         }
 
         [HttpDelete("Remove")]
-        public async Task<RemovedUserGitDto> Remove([FromForm] RemoveGitAddressCommand removeGitAddress)
+        public async Task<IActionResult> Remove([FromForm] RemoveGitAddressCommand removeGitAddress)
         {
             RemovedUserGitDto result = await _mediator.Send(removeGitAddress);
-            return result;
+            return Ok(result);
         }
 
-        [HttpPut("Update")]
-        public async Task<UpdatedUserGitDto> Update([FromForm] UpdateGitAddressCommand updateGitAddress)
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update([FromForm] UpdateGitAddressCommand updateGitAddress)
         {
             UpdatedUserGitDto result = await _mediator.Send(updateGitAddress);
-            return result;
+            return Created("", result);
         }
     }
 }
