@@ -1,4 +1,5 @@
-﻿using Core.Security.Dtos;
+﻿using Application.Features.Auths.Dtos;
+using Core.Security.Dtos;
 using Core.Security.JWT;
 using MediatR;
 using System;
@@ -9,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Auths.Commands.Login
 {
-    public class UserLoginCommand:IRequest<AccessToken>
+    public class LoginCommand:IRequest<LoginedDto>
     {
        public UserForLoginDto Login { get; set; }
+
+        public string IpAddress { get; set; }
     }
 }

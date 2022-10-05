@@ -2,11 +2,12 @@
 
 namespace Application.Features.Auths.Commands.Register
 {
-    public class UserRegisterCommandValidator : AbstractValidator<UserRegisterCommand>
+    public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     {
-        public UserRegisterCommandValidator()
+        public RegisterCommandValidator()
         {
             RuleFor(u => u.Register).NotEmpty().NotNull();
+            RuleFor(u => u.IpAddress).NotEmpty().NotNull();
             RuleFor(u => u.Register.FirstName).MinimumLength(2).NotEmpty().NotNull();
             RuleFor(u => u.Register.LastName).MinimumLength(2).NotEmpty().NotNull();
             RuleFor(u => u.Register.Email).NotEmpty().NotNull().EmailAddress();
