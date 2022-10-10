@@ -17,11 +17,7 @@ namespace WebApi.Controllers
         public AuthsController(IMediator mediator) => _mediator = mediator;
 
         [HttpPut("Register")]
-<<<<<<< HEAD
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto register)
-=======
-        public async Task<ActionResult> Register([FromBody] UserForRegisterDto register)
->>>>>>> 1a163cf1acc36edd41d42c3abdb62eefb134760d
         {
             RegisterCommand registerCommand = new() { Register = register, IpAddress = GetIpAddress() };
 
@@ -33,11 +29,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut("Login")]
-<<<<<<< HEAD
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userLogin)
-=======
-        public async Task<ActionResult> Login([FromBody] UserForLoginDto userLogin)
->>>>>>> 1a163cf1acc36edd41d42c3abdb62eefb134760d
         {
             LoginCommand loginCommand = new() { Login = userLogin, IpAddress = GetIpAddress() };
 
@@ -51,10 +43,6 @@ namespace WebApi.Controllers
         protected string? GetIpAddress()
         {
             if (Request.Headers.ContainsKey("X-Forwarded-For")) return Request.Headers["X-Forwarded-For"];
-<<<<<<< HEAD
-=======
-            // return HttpContext.Connection.RemoteIpAddress?.MapToIPv4().MapToIPv6().ToString();
->>>>>>> 1a163cf1acc36edd41d42c3abdb62eefb134760d
             return HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
         }
 

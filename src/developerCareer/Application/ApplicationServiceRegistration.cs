@@ -26,12 +26,9 @@ namespace Application
             services.AddScoped<ProgrammingTechnologyBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserGitBusinessRules>();
-<<<<<<< HEAD
             services.AddScoped<OperationClaimBusinessRules>();
             services.AddScoped<UserOperationClaimBusinessRules>();
             services.AddScoped<UserBusinessRules>();
-=======
->>>>>>> 1a163cf1acc36edd41d42c3abdb62eefb134760d
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
