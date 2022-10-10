@@ -13,11 +13,11 @@ namespace Application.Features.Auths.Commands.Register
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredDto>
     {
         private readonly IUserRepository _userRepository;
-        
+
         private readonly AuthBusinessRules _authBusinessRules;
 
         private readonly IAuthService _authService;
-        
+
         private readonly IMapper _mapper;
 
         public RegisterCommandHandler(IUserRepository userRepository, AuthBusinessRules authBusinessRules, IAuthService authService, IMapper mapper)
@@ -30,7 +30,7 @@ namespace Application.Features.Auths.Commands.Register
 
         public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            await _authBusinessRules.EmailCanNotBeDublicatedWhenRegistered(request.Register.Email,cancellationToken);
+            await _authBusinessRules.EmailCanNotBeDublicatedWhenRegistered(request.Register.Email, cancellationToken);
 
             User mappedUser = _mapper.Map<User>(request.Register);
 
@@ -46,7 +46,7 @@ namespace Application.Features.Auths.Commands.Register
             AccessToken createdAccessToken = await _authService.CreateAccessToken(registeredUser);
             RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(registeredUser, request.IpAddress);
             RefreshToken AddedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
-                       
+
             return new() { AccessToken = createdAccessToken, RefreshToken = AddedRefreshToken };
         }
     }

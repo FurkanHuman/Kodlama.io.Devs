@@ -1,7 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Dtos;
-using Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
-using Application.Features.ProgrammingLanguages.Rules;
-using Application.Features.ProgrammingTechnologies.Dtos;
+﻿using Application.Features.ProgrammingTechnologies.Dtos;
 using Application.Features.ProgrammingTechnologies.Rules;
 using Application.Services.Repositories;
 using AutoMapper;

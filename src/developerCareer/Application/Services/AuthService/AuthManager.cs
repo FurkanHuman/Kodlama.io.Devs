@@ -1,5 +1,4 @@
-﻿
-using Application.Services.Repositories;
+﻿using Application.Services.Repositories;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Core.Security.JWT;
@@ -34,7 +33,7 @@ namespace Application.Services.AuthService
             IList<OperationClaim> operationClaims = userOperationClaims.Items.Select(u => new OperationClaim
             { Id = u.OperationClaim.Id, Name = u.OperationClaim.Name }).ToList();
 
-            AccessToken accessToken =_tokenHelper.CreateToken(user, operationClaims);
+            AccessToken accessToken = _tokenHelper.CreateToken(user, operationClaims);
             return accessToken;
         }
 

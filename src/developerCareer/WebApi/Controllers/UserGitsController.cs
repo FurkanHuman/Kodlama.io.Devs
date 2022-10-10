@@ -3,7 +3,6 @@ using Application.Features.UserGits.Commands.RemoveGitAddress;
 using Application.Features.UserGits.Commands.UpdateGitAddress;
 using Application.Features.UserGits.Dtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -23,7 +22,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Add([FromForm] CreateGitAddressCommand createGitAddress)
         {
             CreatedUserGitDto result = await _mediator.Send(createGitAddress);
-            return Created("",result);
+            return Created("", result);
         }
 
         [HttpDelete("Remove")]

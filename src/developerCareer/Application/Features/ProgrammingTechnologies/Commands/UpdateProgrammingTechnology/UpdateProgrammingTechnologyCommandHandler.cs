@@ -23,7 +23,7 @@ namespace Application.Features.ProgrammingTechnologies.Commands.UpdateProgrammin
         public async Task<UpdatedProgrammingTechnologyDto> Handle(UpdateProgrammingTechnologyCommand request, CancellationToken cancellationToken)
         {
             ProgrammingTechnology mappedPT = _mapper.Map<ProgrammingTechnology>(request);
-            
+
             _technologyBusinessRules.ProgrammingTechnologyNullCheck(mappedPT);
             await _technologyBusinessRules.ProgrammingTechnologyAddingBeforeDataBaseControlByName(mappedPT.Name);
             await _technologyBusinessRules.ProgrammingLanguageNullCheckById(mappedPT.ProgrammingLanguageId);

@@ -2,7 +2,7 @@
 
 namespace Application.Features.UserGits.Commands.RemoveGitAddress
 {
-    public class RemoveGitAddressCommandValidator:AbstractValidator<RemoveGitAddressCommand>
+    public class RemoveGitAddressCommandValidator : AbstractValidator<RemoveGitAddressCommand>
     {
         public RemoveGitAddressCommandValidator()
         {

@@ -9,7 +9,6 @@ using Application.Features.ProgrammingTechnologies.Queries.GetListProgrammingTec
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers

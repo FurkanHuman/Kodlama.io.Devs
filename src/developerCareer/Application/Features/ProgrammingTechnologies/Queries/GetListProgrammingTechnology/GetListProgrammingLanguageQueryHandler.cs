@@ -1,5 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Models;
-using Application.Features.ProgrammingTechnologies.Models;
+﻿using Application.Features.ProgrammingTechnologies.Models;
 using Application.Services.Repositories;
 using AutoMapper;
 using Core.Persistence.Paging;
@@ -22,7 +21,7 @@ namespace Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLa
 
         public async Task<ProgrammingTechnologyListModel> Handle(GetListProgrammingTechnologyQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ProgrammingTechnology> paginate = await _programmingTechnologyRepository.GetListAsync(include:i=>i.Include(pl=>pl.ProgrammingLanguage), index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<ProgrammingTechnology> paginate = await _programmingTechnologyRepository.GetListAsync(include: i => i.Include(pl => pl.ProgrammingLanguage), index: request.PageRequest.Page, size: request.PageRequest.PageSize);
             return _mapper.Map<ProgrammingTechnologyListModel>(paginate);
         }
     }

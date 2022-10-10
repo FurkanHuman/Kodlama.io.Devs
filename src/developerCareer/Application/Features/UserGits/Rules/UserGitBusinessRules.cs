@@ -33,7 +33,7 @@ namespace Application.Features.UserGits.Rules
         {
             User? getUser = await _userRepo.GetAsync(u => u.Email.ToLower() == userMail.ToLower());
             if (getUser == null) throw new BusinessException("invalid User");
-            
+
             UserGit? getGitUser = await _userGithubRepo.GetAsync(g => g.UserId == getUser.Id);
             if (getGitUser == null) throw new BusinessException("User Git not found");
 

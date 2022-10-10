@@ -13,7 +13,7 @@ namespace Application.Features.Auths.Rules
             _userRepository = userRepository;
         }
 
-        public async Task EmailCanNotBeDublicatedWhenRegistered(string mail,CancellationToken cancellationToken)
+        public async Task EmailCanNotBeDublicatedWhenRegistered(string mail, CancellationToken cancellationToken)
         {
             User? result = await _userRepository.GetAsync(u => u.Email.ToLower() == mail.ToLower());
             if (result != null) throw new BusinessException("Mail already exist");
@@ -26,7 +26,7 @@ namespace Application.Features.Auths.Rules
 
         public void NullCheckByUser(User? getUser)
         {
-            if (getUser==null) throw new BusinessException("invalid mail or password.");
+            if (getUser == null) throw new BusinessException("invalid mail or password.");
         }
     }
 }

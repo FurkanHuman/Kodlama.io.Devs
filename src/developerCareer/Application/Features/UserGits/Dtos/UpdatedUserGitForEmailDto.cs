@@ -8,7 +8,7 @@
         public UpdatedUserGitDto() { }
 
 
-        public UpdatedUserGitDto( string gitAddress, bool isSuccess)
+        public UpdatedUserGitDto(string gitAddress, bool isSuccess)
         {
             GitAddress = gitAddress;
             IsSuccess = isSuccess;

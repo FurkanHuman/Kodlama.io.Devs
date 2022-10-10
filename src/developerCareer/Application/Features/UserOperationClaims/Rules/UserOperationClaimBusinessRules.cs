@@ -3,7 +3,6 @@ using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Application.Features.UserOperationClaims.Rules
 {

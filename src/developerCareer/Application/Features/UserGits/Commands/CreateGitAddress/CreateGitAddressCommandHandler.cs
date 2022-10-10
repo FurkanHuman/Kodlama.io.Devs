@@ -27,7 +27,7 @@ namespace Application.Features.UserGits.Commands.CreateGitAddress
 
             await _userGitRepository.AddAsync(userGitForNew);
 
-            return new() { GitAddress = request.GitAddress, IsSuccess = true, Email=controledUser.Email};
+            return new() { GitAddress = request.GitAddress, IsSuccess = true, Email = controledUser.Email };
         }
     }
 }

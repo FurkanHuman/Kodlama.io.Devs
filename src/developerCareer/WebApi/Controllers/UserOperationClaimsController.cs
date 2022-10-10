@@ -17,7 +17,7 @@ namespace WebApi.Controllers
         public UserOperationClaimsController(IMediator mediator) => _mediator = mediator;
 
         [HttpPut("Add")]
-        public async Task<IActionResult> Add([FromBody] AddClaimForUserCommand addClaimForUserCommand )
+        public async Task<IActionResult> Add([FromBody] AddClaimForUserCommand addClaimForUserCommand)
         {
             AddClaimForUserDto result = await _mediator.Send(addClaimForUserCommand);
             return Created("", result);
@@ -36,7 +36,7 @@ namespace WebApi.Controllers
             DeleteClaimForUserDto result = await _mediator.Send(deleteClaimForUserCommand);
             return Ok(result);
         }
-        
+
         [HttpDelete("DeleteMultiple")]
         public async Task<IActionResult> DeleteMultiple([FromBody] DeleteClaimsForUserCommand deleteClaimsForUserCommand)
         {

@@ -70,7 +70,7 @@ namespace Persistence.Contexts
 
                 u.HasMany(y => y.UserOperationClaims);
                 u.HasMany(y => y.RefreshTokens);
-            }) ;
+            });
 
             modelBuilder.Entity<OperationClaim>(o =>
             {

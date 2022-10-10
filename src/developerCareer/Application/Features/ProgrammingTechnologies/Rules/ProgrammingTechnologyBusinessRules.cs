@@ -2,7 +2,6 @@
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using Domain.Entities;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Application.Features.ProgrammingTechnologies.Rules
 {
@@ -31,7 +30,7 @@ namespace Application.Features.ProgrammingTechnologies.Rules
 
         public void ProgrammingTechnologyNullCheck(ProgrammingTechnology? programmingTechnology)
         {
-            if (programmingTechnology==null) throw new BusinessException("Programming Technology is Null."); 
+            if (programmingTechnology == null) throw new BusinessException("Programming Technology is Null.");
         }
     }
 }

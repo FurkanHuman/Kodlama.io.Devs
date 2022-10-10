@@ -13,7 +13,7 @@ namespace Application.Features.ProgrammingTechnologies.Profiles
     {
         public MappingProfiles()
         {
-            CreateMap<ProgrammingTechnology, CreateProgrammingTechnologyCommand>().ForMember(f=>f.PLId,opt=>opt.MapFrom(o=>o.ProgrammingLanguageId)).ReverseMap();
+            CreateMap<ProgrammingTechnology, CreateProgrammingTechnologyCommand>().ForMember(f => f.PLId, opt => opt.MapFrom(o => o.ProgrammingLanguageId)).ReverseMap();
             CreateMap<ProgrammingTechnology, CreatedProgrammingTechnologyDto>().ReverseMap();
 
             CreateMap<ProgrammingTechnology, UpdateProgrammingTechnologyCommand>().ReverseMap();

@@ -2,7 +2,6 @@
 using Application.Features.UserOperationClaims.Rules;
 using Application.Services.Repositories;
 using Core.Security.Entities;
-using FluentValidation.Results;
 using MediatR;
 
 namespace Application.Features.UserOperationClaims.Commands.DeleteClaimsForUser

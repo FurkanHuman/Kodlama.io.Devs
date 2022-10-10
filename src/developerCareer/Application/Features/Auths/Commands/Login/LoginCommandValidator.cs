@@ -2,7 +2,7 @@
 
 namespace Application.Features.Auths.Commands.Login
 {
-    public class LoginCommandValidator:AbstractValidator<LoginCommand>
+    public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {
         public LoginCommandValidator()
         {

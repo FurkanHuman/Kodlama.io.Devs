@@ -1,5 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Dtos;
-using Application.Features.ProgrammingTechnologies.Dtos;
+﻿using Application.Features.ProgrammingTechnologies.Dtos;
 using MediatR;
 
 namespace Application.Features.ProgrammingTechnologies.Queries.GetByIdProgrammingTechnology

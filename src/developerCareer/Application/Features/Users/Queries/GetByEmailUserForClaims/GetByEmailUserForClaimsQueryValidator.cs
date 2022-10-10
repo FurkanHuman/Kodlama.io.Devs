@@ -2,11 +2,11 @@
 
 namespace Application.Features.Users.Queries.GetByEmailUserForClaims
 {
-    public class GetByEmailUserForClaimsQueryValidator:AbstractValidator<GetByEmailUserForClaimsQuery>
+    public class GetByEmailUserForClaimsQueryValidator : AbstractValidator<GetByEmailUserForClaimsQuery>
     {
         public GetByEmailUserForClaimsQueryValidator()
         {
-            RuleFor(j=>j.Email).NotNull().NotEmpty().EmailAddress();
+            RuleFor(j => j.Email).NotNull().NotEmpty().EmailAddress();
         }
     }
 

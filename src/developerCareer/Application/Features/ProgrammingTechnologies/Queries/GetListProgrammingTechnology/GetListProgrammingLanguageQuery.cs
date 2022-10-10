@@ -1,5 +1,4 @@
-﻿using Application.Features.ProgrammingLanguages.Models;
-using Application.Features.ProgrammingTechnologies.Models;
+﻿using Application.Features.ProgrammingTechnologies.Models;
 using Core.Application.Requests;
 using MediatR;
 
