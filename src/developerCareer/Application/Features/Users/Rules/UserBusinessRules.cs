@@ -13,11 +13,10 @@ namespace Application.Features.Users.Rules
             _userRepository = userRepository;
         }
 
-        public async Task<User> UserExistByMailAddress(string email)
+        public async Task UserExistByMailAddress(string email)
         {
             User? user = await _userRepository.GetAsync(u => u.Email == email);
             if (user == null) throw new BusinessException("Mail not found.");
-            return user;
         }
     }
 }
