@@ -80,6 +80,15 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
+    public async Task<TEntity?> DeleteAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        TEntity? entity = await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+        Context.Entry(entity).State = EntityState.Deleted;
+        await Context.SaveChangesAsync();
+        return entity;
+    }
+
+
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {
         return Context.Set<TEntity>().FirstOrDefault(predicate);
@@ -129,6 +138,14 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     {
         Context.Entry(entity).State = EntityState.Deleted;
         Context.SaveChanges();
+        return entity;
+    }
+
+    public TEntity? Delete(Expression<Func<TEntity, bool>> predicate)
+    {
+        TEntity? entity =  Context.Set<TEntity>().FirstOrDefault(predicate);
+        Context.Entry(entity).State = EntityState.Deleted;
+        Context.SaveChangesAsync();
         return entity;
     }
 }

@@ -21,5 +21,6 @@ public interface IRepository<T> : IQuery<T> where T : class, IEntity, new()
 
     T Add(T entity);
     T Update(T entity);
-    T Delete(T entity);
+    T Delete(T entity); 
+    T Delete(Expression<Func<T, bool>> predicate);
 }
