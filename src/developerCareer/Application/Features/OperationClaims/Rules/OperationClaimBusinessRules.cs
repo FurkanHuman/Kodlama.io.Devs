@@ -20,13 +20,11 @@ namespace Application.Features.OperationClaims.Rules
             if (result != null) throw new BusinessException("Claim is Exit.");
         }
 
-        public async Task<OperationClaim> IdIsAlreadyInDatabase(int id)
+        public async Task IdIsAlreadyInDatabase(int id)
         {
             OperationClaim? result = await _operationClaimRepository.GetAsync(o => o.Id == id);
 
             if (result == null) throw new BusinessException("Claim not found.");
-
-            return result;
         }
     }
 }
