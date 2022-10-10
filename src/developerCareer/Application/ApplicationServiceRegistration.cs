@@ -1,14 +1,17 @@
 ﻿
 using Application.Features.Auths.Rules;
-using Application.Features.UserGits.Rules;
+using Application.Features.OperationClaims.Rules;
 using Application.Features.ProgrammingLanguages.Rules;
 using Application.Features.ProgrammingTechnologies.Rules;
+using Application.Features.UserGits.Rules;
+using Application.Features.UserOperationClaims.Rules;
+using Application.Features.Users.Rules;
+using Application.Services.AuthService;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Application.Services.AuthService;
 
 namespace Application
 {
@@ -23,6 +26,9 @@ namespace Application
             services.AddScoped<ProgrammingTechnologyBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserGitBusinessRules>();
+            services.AddScoped<OperationClaimBusinessRules>();
+            services.AddScoped<UserOperationClaimBusinessRules>();
+            services.AddScoped<UserBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
