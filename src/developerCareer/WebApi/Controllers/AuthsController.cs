@@ -3,7 +3,9 @@ using Application.Features.Auths.Commands.Register;
 using Application.Features.Auths.Dtos;
 using Core.Security.Dtos;
 using Core.Security.Entities;
+using Core.Security.JWT;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
