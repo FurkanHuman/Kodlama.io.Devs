@@ -36,25 +36,5 @@ namespace Application.Features.UserOperationClaims.Rules
             var getListOperationClaims = _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
             if (getListOperationClaims.Count == 0) throw new BusinessException("operation Claims Don't Exist.");
         }
-
-        public async Task CheckifUserOperationClaimExistsByMailAndClaimId(string mail, int claimId)
-        {
-            User getUser = await CheckIfUserMailExists(mail);
-            OperationClaim getOC = await CheckifOperationClaimExists(claimId);
-
-            UserOperationClaim? getUserOperationClaim = await _userOperationClaimRepository.GetAsync(u => u.UserId == getUser.Id && u.OperationClaimId == getOC.Id);
-            if (getUserOperationClaim == null) throw new BusinessException("User Operation Claim not Exist.");
-            return getUserOperationClaim;
-        }
-
-        public async Task CheckifUserOperationClaimExistsByMailAndClaimIds(string mail, IList<int> claimIds)
-        {
-            User getUser = await CheckIfUserMailExists(mail);
-            IList<int> getOCIds = CheckifOperationClaimsExists(claimIds).Select(p => p.Id).ToList();
-
-            var getUserOperationClaims = _userOperationClaimRepository.GetListAsync(u => u.UserId == getUser.Id && getOCIds.Contains(u.OperationClaimId), size: int.MaxValue, include: y => y.Include(k => k.OperationClaim).Include(k => k.User));
-
-            if (getUserOperationClaims.Count == 0) throw new BusinessException("User Operation Claims not Exist.");
-        }
     }
 }
