@@ -33,7 +33,7 @@ namespace Application.Features.UserOperationClaims.Rules
 
         public void CheckifOperationClaimsExists(IList<int> claimIds)
         {
-            IList<OperationClaim> getListOperationClaims = _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue).Result.Items;
+            var getListOperationClaims = _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
             if (getListOperationClaims.Count == 0) throw new BusinessException("operation Claims Don't Exist.");
         }
 
