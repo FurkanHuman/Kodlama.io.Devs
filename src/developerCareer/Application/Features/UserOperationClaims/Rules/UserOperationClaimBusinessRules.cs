@@ -31,7 +31,7 @@ namespace Application.Features.UserOperationClaims.Rules
             if (getOperationClaim == null) throw new BusinessException("operation Claim Don't Exist.");
         }
 
-        public void CheckifOperationClaimsExists(IList<int> claimIds)
+        public async Task CheckifOperationClaimsExists(IList<int> claimIds)
         {
             var getListOperationClaims = _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
             if (getListOperationClaims.Count == 0) throw new BusinessException("operation Claims Don't Exist.");
