@@ -52,7 +52,7 @@ namespace Application.Features.UserOperationClaims.Rules
             User getUser = await CheckIfUserMailExists(mail);
             IList<int> getOCIds = CheckifOperationClaimsExists(claimIds).Select(p => p.Id).ToList();
 
-            IList<UserOperationClaim> getUserOperationClaims = _userOperationClaimRepository.GetListAsync(u => u.UserId == getUser.Id && getOCIds.Contains(u.OperationClaimId), size: int.MaxValue, include: y => y.Include(k => k.OperationClaim).Include(k => k.User)).Result.Items;
+            var getUserOperationClaims = _userOperationClaimRepository.GetListAsync(u => u.UserId == getUser.Id && getOCIds.Contains(u.OperationClaimId), size: int.MaxValue, include: y => y.Include(k => k.OperationClaim).Include(k => k.User));
 
             if (getUserOperationClaims.Count == 0) throw new BusinessException("User Operation Claims not Exist.");
         }
