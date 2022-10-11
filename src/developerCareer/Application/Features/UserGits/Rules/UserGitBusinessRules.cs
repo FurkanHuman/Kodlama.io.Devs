@@ -19,9 +19,8 @@ namespace Application.Features.UserGits.Rules
 
         public async Task UserIsExistByUserMailAndGitAddress(string userMail, string gitaddress)
         {
-            User? getUser = await _userRepo.GetAsync(u => u.Email.ToLower() == userMail.ToLower());
+            User? getUser = await _userRepo.GetAsync(u => u.Email == userMail);
             if (getUser == null) throw new BusinessException("invalid User");
-
 
             IPaginate<UserGit> result = await _userGithubRepo.GetListAsync(g => g.GitLink.ToLower() == gitaddress.ToLower() && g.UserId == getUser.Id);
             if (result.Count >= 1) throw new BusinessException("User git is exit.");
@@ -29,7 +28,7 @@ namespace Application.Features.UserGits.Rules
 
         public async Task UserGitIsExistByUserMail(string userMail)
         {
-            User? getUser = await _userRepo.GetAsync(u => u.Email.ToLower() == userMail.ToLower());
+            User? getUser = await _userRepo.GetAsync(u => u.Email == userMail);
             if (getUser == null) throw new BusinessException("invalid User");
 
             UserGit? getGitUser = await _userGithubRepo.GetAsync(g => g.UserId == getUser.Id);

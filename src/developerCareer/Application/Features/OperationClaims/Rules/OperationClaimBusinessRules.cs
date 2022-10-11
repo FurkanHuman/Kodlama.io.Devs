@@ -14,9 +14,15 @@ namespace Application.Features.OperationClaims.Rules
             _operationClaimRepository = operationClaimRepository;
         }
 
+        public void NullCheck(OperationClaim? operationClaim)
+        {
+            if (operationClaim == null) throw new BusinessException("Claim is not Exit.");
+        }
+
         public async Task NameIsExist(string name)
         {
             OperationClaim? result = await _operationClaimRepository.GetAsync(c => c.Name.ToLower() == name.ToLower());
+
             if (result != null) throw new BusinessException("Claim is Exit.");
         }
 

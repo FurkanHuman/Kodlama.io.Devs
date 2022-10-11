@@ -19,11 +19,13 @@ namespace Application.Features.UserGits.Commands.UpdateGitAddress
 
         public async Task<UpdatedUserGitDto> Handle(UpdateGitAddressCommand request, CancellationToken cancellationToken)
         {
-            UserGit controledUserGit = await _userGitBusinessRules.UserGitIsExistByUserMail(request.Email);
+            await _userGitBusinessRules.UserGitIsExistByUserMail(request.Email);
 
-            controledUserGit.GitLink = request.GitAddress;
+            UserGit getUserGit = await _userGitRepository.GetAsync(r => r.User.Email == request.Email);
 
-            await _userGitRepository.UpdateAsync(controledUserGit);
+            getUserGit.GitLink=request.GitAddress;                
+                      
+            await _userGitRepository.UpdateAsync(getUserGit);
 
             return new() { GitAddress = request.GitAddress, IsSuccess = true, };
         }

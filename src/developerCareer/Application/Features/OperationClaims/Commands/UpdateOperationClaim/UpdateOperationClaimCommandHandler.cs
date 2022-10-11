@@ -22,13 +22,15 @@ namespace Application.Features.OperationClaims.Commands.CreateOperationClaim
 
         public async Task<UpdatedOperationClaimDto> Handle(UpdateOperationClaimCommand request, CancellationToken cancellationToken)
         {
+            OperationClaim mappedOC = _mapper.Map<OperationClaim>(request);
+
             await _operationClaimBusinessRules.NameIsExist(request.Name);
 
-            OperationClaim getedOperationClaim = await _operationClaimBusinessRules.IdIsAlreadyInDatabase(request.Id);
+            await _operationClaimBusinessRules.IdIsAlreadyInDatabase(request.Id);
 
-            OperationClaim addedOperationClaim = await _operationClaimRepository.AddAsync(getedOperationClaim);
+            OperationClaim updatedOperationClaim = await _operationClaimRepository.UpdateAsync(mappedOC);
 
-            return _mapper.Map<UpdatedOperationClaimDto>(addedOperationClaim);
+            return _mapper.Map<UpdatedOperationClaimDto>(updatedOperationClaim);
         }
     }
 }

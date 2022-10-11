@@ -1,6 +1,7 @@
 ﻿
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
+using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,7 +34,7 @@ namespace Application.Features.UserOperationClaims.Rules
 
         public async Task CheckifOperationClaimsExists(IList<int> claimIds)
         {
-            var getListOperationClaims = _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
+            IPaginate<OperationClaim> getListOperationClaims = await _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
             if (getListOperationClaims.Count == 0) throw new BusinessException("operation Claims Don't Exist.");
         }
     }

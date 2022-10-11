@@ -1,6 +1,7 @@
 ﻿using Application.Features.UserOperationClaims.Dtos;
 using Application.Features.UserOperationClaims.Rules;
 using Application.Services.Repositories;
+using Core.Persistence.Paging;
 using Core.Security.Entities;
 using MediatR;
 
@@ -21,16 +22,19 @@ namespace Application.Features.UserOperationClaims.Commands.DeleteClaimsForUser
         {
             IList<Guid> userOperationClaimIds = new List<Guid>();
 
-            IList<UserOperationClaim> userOperationClaims = await _userOperationClaimBusinessRules.CheckifUserOperationClaimExistsByMailAndClaimIds(request.UserMail, request.ClaimIds);
+            await _userOperationClaimBusinessRules.CheckifOperationClaimsExists(request.ClaimIds);
 
-            foreach (UserOperationClaim userOperationClaim in userOperationClaims)
+            await _userOperationClaimBusinessRules.CheckIfUserMailExists(request.UserMail);
+
+            IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(u => request.ClaimIds.Contains(u.OperationClaimId) && u.User.Email == request.UserMail, size: int.MaxValue, cancellationToken: cancellationToken);
+
+            foreach (UserOperationClaim userOperationClaim in userOperationClaims.Items)
             {
                 UserOperationClaim deletedUOC = await _userOperationClaimRepository.DeleteAsync(userOperationClaim);
                 userOperationClaimIds.Add(deletedUOC.Id);
             }
 
-
-            return new() { ClaimNames = userOperationClaims.Select(p => p.OperationClaim.Name).ToList(), UserMail = request.UserMail };
+            return new() { ClaimNames = userOperationClaims.Items.Select(p => p.OperationClaim.Name).ToList(), UserMail = request.UserMail };
         }
     }
 }

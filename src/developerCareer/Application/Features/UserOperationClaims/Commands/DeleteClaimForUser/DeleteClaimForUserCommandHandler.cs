@@ -20,11 +20,13 @@ namespace Application.Features.UserOperationClaims.Commands.DeleteClaimForUser
 
         public async Task<DeleteClaimForUserDto> Handle(DeleteClaimForUserCommand request, CancellationToken cancellationToken)
         {
-            UserOperationClaim getUserOperationClaim = await _userOperationClaimBusinessRules.CheckifUserOperationClaimExistsByMailAndClaimId(request.UserMail, request.ClaimId);
+            await _userOperationClaimBusinessRules.CheckifOperationClaimExists(request.ClaimId);
 
-            await _userOperationClaimRepository.DeleteAsync(getUserOperationClaim);
+            await _userOperationClaimBusinessRules.CheckIfUserMailExists(request.UserMail);
 
-            return new() { ClaimName = getUserOperationClaim.OperationClaim.Name, UserMail = getUserOperationClaim.User.Email };
+            UserOperationClaim deletedUserOperationClaim = await _userOperationClaimRepository.DeleteAsync(u => u.OperationClaimId == request.ClaimId && u.User.Email == request.UserMail);
+
+            return new() { ClaimName = deletedUserOperationClaim.OperationClaim.Name, UserMail = deletedUserOperationClaim.User.Email };
         }
     }
 }

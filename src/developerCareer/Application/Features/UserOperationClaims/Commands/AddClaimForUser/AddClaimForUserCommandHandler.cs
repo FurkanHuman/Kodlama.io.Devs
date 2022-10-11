@@ -9,22 +9,26 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimForUser
     public class AddClaimForUserCommandHandler : IRequestHandler<AddClaimForUserCommand, AddClaimForUserDto>
     {
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
+        private readonly IUserRepository _userRepository;
         private readonly UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
 
-        public AddClaimForUserCommandHandler(IUserOperationClaimRepository userOperationClaimRepository, UserOperationClaimBusinessRules userOperationClaimBusinessRules)
+        public AddClaimForUserCommandHandler(IUserOperationClaimRepository userOperationClaimRepository, IUserRepository userRepository, UserOperationClaimBusinessRules userOperationClaimBusinessRules)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
+            _userRepository = userRepository;
             _userOperationClaimBusinessRules = userOperationClaimBusinessRules;
         }
 
         public async Task<AddClaimForUserDto> Handle(AddClaimForUserCommand request, CancellationToken cancellationToken)
         {
-            User validatedUser = await _userOperationClaimBusinessRules.CheckIfUserMailExists(request.UserMail);
-            OperationClaim validatedClaim = await _userOperationClaimBusinessRules.CheckifOperationClaimExists(request.ClaimId);
+            await _userOperationClaimBusinessRules.CheckIfUserMailExists(request.UserMail);
+            await _userOperationClaimBusinessRules.CheckifOperationClaimExists(request.ClaimId);
 
-            UserOperationClaim addedUPC = _userOperationClaimRepository.Add(new() { OperationClaimId = validatedClaim.Id, UserId = validatedUser.Id });
+            User? getUser = await _userRepository.GetAsync(u => u.Email == request.UserMail);
 
-            return new() { Id = addedUPC.Id, ClaimName = validatedClaim.Name, UserMail = validatedUser.Email };
+            UserOperationClaim addedUPC = _userOperationClaimRepository.Add(new() { OperationClaimId = request.ClaimId, UserId = getUser.Id });
+
+            return new() { Id = addedUPC.Id, ClaimName = addedUPC.OperationClaim.Name, UserMail = getUser.Email };
         }
     }
 }

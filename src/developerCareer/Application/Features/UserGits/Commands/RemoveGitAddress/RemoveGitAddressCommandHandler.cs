@@ -19,11 +19,11 @@ namespace Application.Features.UserGits.Commands.RemoveGitAddress
 
         public async Task<RemovedUserGitDto> Handle(RemoveGitAddressCommand request, CancellationToken cancellationToken)
         {
-            UserGit controledGitUser = await _userGitBusinessRules.UserGitIsExistByUserMail(request.Email);
+            await _userGitBusinessRules.UserGitIsExistByUserMail(request.Email);
 
-            await _userGitRepository.DeleteAsync(controledGitUser);
+            UserGit deletedGitAddress = await _userGitRepository.DeleteAsync(y => y.User.Email == request.Email);
 
-            return new() { GitAddress = controledGitUser.GitLink, IsSuccess = true };
+            return new() { GitAddress = deletedGitAddress.GitLink, IsSuccess = true };
         }
     }
 }

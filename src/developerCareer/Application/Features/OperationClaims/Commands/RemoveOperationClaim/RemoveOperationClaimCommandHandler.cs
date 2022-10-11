@@ -22,11 +22,11 @@ namespace Application.Features.OperationClaims.Commands.RemoveOperationClaim
 
         public async Task<RemovedOperationClaimDto> Handle(RemoveOperationClaimCommand request, CancellationToken cancellationToken)
         {
-            OperationClaim getedOperationClaim = await _operationClaimBusinessRules.IdIsAlreadyInDatabase(request.Id);
+            await _operationClaimBusinessRules.IdIsAlreadyInDatabase(request.Id);
 
-            await _operationClaimRepository.DeleteAsync(getedOperationClaim);
+            OperationClaim deletedOperationClaim =await _operationClaimRepository.DeleteAsync(u => u.Id == request.Id);
 
-            return _mapper.Map<RemovedOperationClaimDto>(getedOperationClaim);
+            return _mapper.Map<RemovedOperationClaimDto>(deletedOperationClaim);
         }
     }
 }
