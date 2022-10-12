@@ -24,7 +24,10 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimForUser
             await _userOperationClaimBusinessRules.CheckIfUserMailExists(request.UserMail);
             await _userOperationClaimBusinessRules.CheckifOperationClaimExists(request.ClaimId);
 
+            
             User? getUser = await _userRepository.GetAsync(u => u.Email == request.UserMail);
+
+            await _userOperationClaimBusinessRules.CheckifUserOperationClaimExists(getUser, request.ClaimId);
 
             UserOperationClaim addedUPC = _userOperationClaimRepository.Add(new() { OperationClaimId = request.ClaimId, UserId = getUser.Id });
 

@@ -28,6 +28,8 @@ namespace Application.Features.UserOperationClaims.Commands.DeleteClaimsForUser
 
             IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(u => request.ClaimIds.Contains(u.OperationClaimId) && u.User.Email == request.UserMail, size: int.MaxValue, cancellationToken: cancellationToken);
 
+            _userOperationClaimBusinessRules.UserOperationClaimsNullCheck(userOperationClaims.Items);
+
             foreach (UserOperationClaim userOperationClaim in userOperationClaims.Items)
             {
                 UserOperationClaim deletedUOC = await _userOperationClaimRepository.DeleteAsync(userOperationClaim);

@@ -31,10 +31,16 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
             await _userOperationClaimBusinessRules.CheckifOperationClaimsExists(request.ClaimIds);
 
             User getUser = await _userRepository.GetAsync(h => h.Email == request.UserMail);
-            
-            IPaginate<OperationClaim> validatedOP = await _operationClaimRepository.GetListAsync(o => request.ClaimIds.Contains(o.Id));
 
-            foreach (OperationClaim OP in validatedOP.Items)
+            IPaginate<OperationClaim> getOperationClaimsForUser = await _operationClaimRepository.GetListAsync(o => request.ClaimIds.Contains(o.Id));
+
+            IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(k => k.UserId == getUser.Id);
+
+            IList<OperationClaim> newOperationClaimForUser = getOperationClaimsForUser.Items.Except(userOperationClaims.Items.Select(y=>y.OperationClaim)).ToList();
+
+            _userOperationClaimBusinessRules.ClaimsIsNull(newOperationClaimForUser);
+
+            foreach (OperationClaim OP in newOperationClaimForUser)
             {
                 UserOperationClaim newUserOperationClaim = new() { UserId = getUser.Id, OperationClaimId = OP.Id };
 
@@ -43,7 +49,7 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
                 userOperationClaimIds.Add(addedUserOperationClaim.Id);
             }
 
-            return new() { ClaimNames = validatedOP.Items.Select(p => p.Name).ToList(), Ids = userOperationClaimIds, UserMail = getUser.Email };
+            return new() { ClaimNames = newOperationClaimForUser.Select(p => p.Name).ToList(), Ids = userOperationClaimIds, UserMail = getUser.Email };
         }
     }
 }
