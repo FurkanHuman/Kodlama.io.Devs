@@ -32,9 +32,9 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
 
             User getUser = await _userRepository.GetAsync(h => h.Email == request.UserMail);
 
-            IPaginate<OperationClaim> getOperationClaimsForUser = await _operationClaimRepository.GetListAsync(o => request.ClaimIds.Contains(o.Id));
+            IPaginate<OperationClaim> getOperationClaimsForUser = await _operationClaimRepository.GetListAsync(o => request.ClaimIds.Contains(o.Id),size: int.MaxValue);
 
-            IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(k => k.UserId == getUser.Id);
+            IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(k => k.UserId == getUser.Id, size: int.MaxValue);
 
             IList<OperationClaim> newOperationClaimForUser = getOperationClaimsForUser.Items.Except(userOperationClaims.Items.Select(y => y.OperationClaim)).ToList();
 
