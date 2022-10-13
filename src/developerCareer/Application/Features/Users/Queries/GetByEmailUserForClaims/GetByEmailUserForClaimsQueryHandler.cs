@@ -27,9 +27,9 @@ namespace Application.Features.Users.Queries.GetByEmailUserForClaims
 
             User? getUser = await _userRepository.GetAsync(u => u.Email == request.Email);
 
-            IPaginate<UserOperationClaim> operationClaims =await _userOperationClaimRepository.GetListAsync(y => y.User.Email == request.Email, include: y => y.Include(k => k.OperationClaim), size: int.MaxValue);
+            IPaginate<UserOperationClaim> operationClaims = await _userOperationClaimRepository.GetListAsync(y => y.User.Email == request.Email, include: y => y.Include(k => k.OperationClaim), size: int.MaxValue);
 
-            return new() { ClaimsName = operationClaims.Items.Select(j=>j.OperationClaim.Name).ToList(), Email = getUser.Email, FirstName = getUser.FirstName, LastName = getUser.LastName };
+            return new() { ClaimsName = operationClaims.Items.Select(j => j.OperationClaim.Name).ToList(), Email = getUser.Email, FirstName = getUser.FirstName, LastName = getUser.LastName };
         }
     }
 }

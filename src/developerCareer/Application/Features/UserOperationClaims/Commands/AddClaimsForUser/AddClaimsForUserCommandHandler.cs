@@ -36,7 +36,7 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
 
             IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(k => k.UserId == getUser.Id);
 
-            IList<OperationClaim> newOperationClaimForUser = getOperationClaimsForUser.Items.Except(userOperationClaims.Items.Select(y=>y.OperationClaim)).ToList();
+            IList<OperationClaim> newOperationClaimForUser = getOperationClaimsForUser.Items.Except(userOperationClaims.Items.Select(y => y.OperationClaim)).ToList();
 
             _userOperationClaimBusinessRules.ClaimsIsNull(newOperationClaimForUser);
 

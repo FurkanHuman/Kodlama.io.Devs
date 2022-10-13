@@ -24,7 +24,7 @@ namespace Application.Features.OperationClaims.Commands.RemoveOperationClaim
         {
             await _operationClaimBusinessRules.IdIsAlreadyInDatabase(request.Id);
 
-            OperationClaim deletedOperationClaim =await _operationClaimRepository.DeleteAsync(u => u.Id == request.Id);
+            OperationClaim deletedOperationClaim = await _operationClaimRepository.DeleteAsync(u => u.Id == request.Id);
 
             return _mapper.Map<RemovedOperationClaimDto>(deletedOperationClaim);
         }

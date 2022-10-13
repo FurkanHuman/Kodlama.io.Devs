@@ -25,7 +25,7 @@ namespace Application.Features.OperationClaims.Queries.GetByIdOperationClaim
             OperationClaim? getByIdForOperationClaim = await _operationClaimRepository.GetAsync(r => r.Id == request.Id);
 
             _operationClaimBusinessRules.NullCheck(getByIdForOperationClaim);
-                        
+
             return _mapper.Map<OperationClaimGetByIdDto>(getByIdForOperationClaim);
         }
     }

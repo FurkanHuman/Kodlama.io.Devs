@@ -4,7 +4,6 @@ using Application.Services.Repositories;
 using Core.Security.Entities;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Application.Features.UserGits.Commands.CreateGitAddress
 {

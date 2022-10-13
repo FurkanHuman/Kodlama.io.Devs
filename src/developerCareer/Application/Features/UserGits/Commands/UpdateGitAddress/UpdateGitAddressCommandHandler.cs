@@ -23,8 +23,8 @@ namespace Application.Features.UserGits.Commands.UpdateGitAddress
 
             UserGit getUserGit = await _userGitRepository.GetAsync(r => r.User.Email == request.Email);
 
-            getUserGit.GitLink=request.GitAddress;                
-                      
+            getUserGit.GitLink = request.GitAddress;
+
             await _userGitRepository.UpdateAsync(getUserGit);
 
             return new() { GitAddress = request.GitAddress, IsSuccess = true, };
