@@ -6,7 +6,7 @@ using Application.Features.ProgrammingTechnologies.Rules;
 using Application.Features.UserGits.Rules;
 using Application.Features.UserOperationClaims.Rules;
 using Application.Features.Users.Rules;
-using Application.Services.AuthService;
+using Application.Services.AltServices.AuthService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;

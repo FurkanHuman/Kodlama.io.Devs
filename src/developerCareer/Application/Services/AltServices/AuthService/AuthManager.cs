@@ -4,7 +4,7 @@ using Core.Security.Entities;
 using Core.Security.JWT;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Services.AuthService
+namespace Application.Services.AltServices.AuthService
 {
     public class AuthManager : IAuthService
     {
@@ -28,7 +28,7 @@ namespace Application.Services.AuthService
         public async Task<AccessToken> CreateAccessToken(User user)
         {
             IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(u => u.UserId == user.Id,
-                                                                                                        include: u => u.Include(u => u.OperationClaim),size: int.MaxValue);
+                                                                                                        include: u => u.Include(u => u.OperationClaim), size: int.MaxValue);
 
             IList<OperationClaim> operationClaims = userOperationClaims.Items.Select(u => new OperationClaim
             { Id = u.OperationClaim.Id, Name = u.OperationClaim.Name }).ToList();

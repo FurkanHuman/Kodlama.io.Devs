@@ -1,8 +1,7 @@
-﻿
-using Core.Security.Entities;
+﻿using Core.Security.Entities;
 using Core.Security.JWT;
 
-namespace Application.Services.AuthService
+namespace Application.Services.AltServices.AuthService
 {
     public interface IAuthService
     {
