@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221013001948_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,43 +41,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OperationClaims", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Add"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Remove"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Update"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Get"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "GetList"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "BlackList"
-                        });
                 });
 
             modelBuilder.Entity("Core.Security.Entities.RefreshToken", b =>
@@ -216,18 +181,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProgrammingLanguages", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Assembly"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "C"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.ProgrammingTechnology", b =>
@@ -253,20 +206,6 @@ namespace Persistence.Migrations
                     b.HasIndex("ProgrammingLanguageId");
 
                     b.ToTable("ProgrammingTechnologies", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "WFP",
-                            ProgrammingLanguageId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Pygame",
-                            ProgrammingLanguageId = 7
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserGit", b =>

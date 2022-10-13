@@ -116,15 +116,6 @@ namespace Persistence.Contexts
 
                 g.HasOne(o => o.User);
             });
-
-            ProgrammingLanguage[] programmingLanguageSeed = { new(1, "Assembly"), new(2, "C") };
-            modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguageSeed);
-
-            ProgrammingTechnology[] programmingTechnologies = { new(1, "WFP", 3), new(2, "Pygame", 7) };
-            modelBuilder.Entity<ProgrammingTechnology>().HasData(programmingTechnologies);
-
-            OperationClaim[] operationClaims = { new(1, "Admin"), new(2, "Add"), new(3, "Remove"), new(4, "Update"), new(5, "Get"), new(6, "GetList"), new(7, "BlackList") };
-            modelBuilder.Entity<OperationClaim>().HasData(operationClaims);
         }
     }
 }
