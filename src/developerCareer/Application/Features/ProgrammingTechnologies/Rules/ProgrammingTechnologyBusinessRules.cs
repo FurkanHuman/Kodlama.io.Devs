@@ -1,4 +1,5 @@
-﻿using Application.Services.Repositories;
+﻿using Application.Services.AltServices.ProgrammingTechnologyService;
+using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using Domain.Entities;
@@ -7,18 +8,18 @@ namespace Application.Features.ProgrammingTechnologies.Rules
 {
     public class ProgrammingTechnologyBusinessRules
     {
-        private readonly IProgrammingLanguageRepository _programmingLanguageRepo;
         private readonly IProgrammingTechnologyRepository _programmingTechnologyRepo;
+        private readonly IProgrammingTechnologyService _programmingTechnologyService;
 
-        public ProgrammingTechnologyBusinessRules(IProgrammingLanguageRepository programmingLanguageRepo, IProgrammingTechnologyRepository programmingTechnologyRepo)
+        public ProgrammingTechnologyBusinessRules(IProgrammingTechnologyRepository programmingTechnologyRepo, IProgrammingTechnologyService programmingTechnologyService)
         {
-            _programmingLanguageRepo = programmingLanguageRepo;
             _programmingTechnologyRepo = programmingTechnologyRepo;
+            _programmingTechnologyService = programmingTechnologyService;
         }
 
         public async Task ProgrammingLanguageNullCheckById(int programmingLanguageId)
         {
-            ProgrammingLanguage? result = await _programmingLanguageRepo.GetAsync(pl => pl.Id == programmingLanguageId);
+            ProgrammingLanguage? result = await _programmingTechnologyService.GetProgrammingLanguageById(programmingLanguageId);
             if (result == null) throw new BusinessException("Programming Language is Null.");
         }
 

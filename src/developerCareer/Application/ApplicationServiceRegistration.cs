@@ -39,6 +39,7 @@ namespace Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IProgrammingTechnologyService, ProgrammingTechnologyManager>();
 
             return services;
         }
