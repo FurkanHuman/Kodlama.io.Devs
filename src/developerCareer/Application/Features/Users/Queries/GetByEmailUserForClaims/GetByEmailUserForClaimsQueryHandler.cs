@@ -2,10 +2,8 @@
 using Application.Features.Users.Rules;
 using Application.Services.AltServices.UserService;
 using Application.Services.Repositories;
-using Core.Persistence.Paging;
 using Core.Security.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Users.Queries.GetByEmailUserForClaims
 {
@@ -27,7 +25,7 @@ namespace Application.Features.Users.Queries.GetByEmailUserForClaims
 
             User? getUser = await _userRepository.GetAsync(u => u.Email == request.Email);
 
-            return new() { ClaimsName = await _userService.GetByUserForUserOperationClaimsAsync(getUser), Email = getUser.Email, FirstName = getUser.FirstName, LastName = getUser.LastName };
+            return new() { ClaimsName = await _userService.GetByUserForUserOperationClaimNamesAsync(getUser), Email = getUser.Email, FirstName = getUser.FirstName, LastName = getUser.LastName };
         }
     }
 }
