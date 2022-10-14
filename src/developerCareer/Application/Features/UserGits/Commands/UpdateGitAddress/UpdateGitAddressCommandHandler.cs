@@ -21,13 +21,13 @@ namespace Application.Features.UserGits.Commands.UpdateGitAddress
         {
             await _userGitBusinessRules.UserGitIsExistByUserMail(request.Email);
 
-            UserGit getUserGit = await _userGitRepository.GetAsync(r => r.User.Email == request.Email);
+            UserGit? getUserGit = await _userGitRepository.GetAsync(r => r.User.Email == request.Email);
 
             getUserGit.GitLink = request.GitAddress;
 
-            await _userGitRepository.UpdateAsync(getUserGit);
+            UserGit UpdatedUserGit = await _userGitRepository.UpdateAsync(getUserGit);
 
-            return new() { GitAddress = request.GitAddress, IsSuccess = true, };
+            return new() { GitAddress = UpdatedUserGit.GitLink, IsSuccess = true, };
         }
     }
 }

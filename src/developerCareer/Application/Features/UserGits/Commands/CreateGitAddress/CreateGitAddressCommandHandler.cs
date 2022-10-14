@@ -1,5 +1,6 @@
 ﻿using Application.Features.UserGits.Dtos;
 using Application.Features.UserGits.Rules;
+using Application.Services.AltServices.UserGitService;
 using Application.Services.Repositories;
 using Core.Security.Entities;
 using Domain.Entities;
@@ -10,13 +11,13 @@ namespace Application.Features.UserGits.Commands.CreateGitAddress
     public class CreateGitAddressCommandHandler : IRequestHandler<CreateGitAddressCommand, CreatedUserGitDto>
     {
         private readonly IUserGitRepository _userGitRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserGitService _userGitService;
         private readonly UserGitBusinessRules _userGitBusinessRules;
 
-        public CreateGitAddressCommandHandler(IUserGitRepository userGitRepository, IUserRepository userRepository, UserGitBusinessRules userGitBusinessRules)
+        public CreateGitAddressCommandHandler(IUserGitRepository userGitRepository, IUserGitService userGitService, UserGitBusinessRules userGitBusinessRules)
         {
             _userGitRepository = userGitRepository;
-            _userRepository = userRepository;
+            _userGitService = userGitService;
             _userGitBusinessRules = userGitBusinessRules;
         }
 
@@ -24,9 +25,7 @@ namespace Application.Features.UserGits.Commands.CreateGitAddress
         {
             await _userGitBusinessRules.UserIsExistByUserMailAndGitAddress(request.Email, request.GitAddress);
 
-            User? getUser = await _userRepository.GetAsync(u => u.Email == request.Email);
-
-            UserGit userGitForNew = new() { GitLink = request.GitAddress, User = getUser };
+            UserGit userGitForNew = new() { GitLink = request.GitAddress, User = await _userGitService.GetUserByEmailAsync(request.Email) };
 
             UserGit addedGitUser = await _userGitRepository.AddAsync(userGitForNew);
 
