@@ -40,6 +40,9 @@ namespace Application
 
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<IProgrammingTechnologyService, ProgrammingTechnologyManager>();
+            services.AddScoped<IUserGitService, UserGitManager>();
+            services.AddScoped<IUserOperationClaimService, UserOperationClaimManager>();
+            services.AddScoped<IUserService, UserManager>();
 
             return services;
         }

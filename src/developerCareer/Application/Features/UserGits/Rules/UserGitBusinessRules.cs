@@ -1,4 +1,5 @@
-﻿using Application.Services.Repositories;
+﻿using Application.Services.AltServices.UserGitService;
+using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -9,17 +10,17 @@ namespace Application.Features.UserGits.Rules
     public class UserGitBusinessRules
     {
         private readonly IUserGitRepository _userGithubRepo;
-        private readonly IUserRepository _userRepo;
+        private readonly IUserGitService _userGitService;
 
-        public UserGitBusinessRules(IUserGitRepository userGithubRepo, IUserRepository userRepo)
+        public UserGitBusinessRules(IUserGitRepository userGithubRepo, IUserGitService userGitService)
         {
             _userGithubRepo = userGithubRepo;
-            _userRepo = userRepo;
+            _userGitService = userGitService;
         }
 
         public async Task UserIsExistByUserMailAndGitAddress(string userMail, string gitaddress)
         {
-            User? getUser = await _userRepo.GetAsync(u => u.Email == userMail);
+            User? getUser = await _userGitService.GetUserByEmailAsync(userMail);
             if (getUser == null) throw new BusinessException("invalid User");
 
             IPaginate<UserGit> result = await _userGithubRepo.GetListAsync(g => g.GitLink.ToLower() == gitaddress.ToLower() && g.UserId == getUser.Id);
@@ -28,7 +29,7 @@ namespace Application.Features.UserGits.Rules
 
         public async Task UserGitIsExistByUserMail(string userMail)
         {
-            User? getUser = await _userRepo.GetAsync(u => u.Email == userMail);
+            User? getUser = await _userGitService.GetUserByEmailAsync(userMail);
             if (getUser == null) throw new BusinessException("invalid User");
 
             UserGit? getGitUser = await _userGithubRepo.GetAsync(g => g.UserId == getUser.Id);
