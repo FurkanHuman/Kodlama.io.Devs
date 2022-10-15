@@ -1,5 +1,4 @@
-﻿
-using Application.Features.Auths.Rules;
+﻿using Application.Features.Auths.Rules;
 using Application.Features.OperationClaims.Rules;
 using Application.Features.ProgrammingLanguages.Rules;
 using Application.Features.ProgrammingTechnologies.Rules;
@@ -7,6 +6,10 @@ using Application.Features.UserGits.Rules;
 using Application.Features.UserOperationClaims.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AltServices.AuthService;
+using Application.Services.AltServices.ProgrammingTechnologyService;
+using Application.Services.AltServices.UserGitService;
+using Application.Services.AltServices.UserOperationClaimService;
+using Application.Services.AltServices.UserService;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
