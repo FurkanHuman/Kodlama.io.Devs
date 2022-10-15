@@ -1,4 +1,4 @@
-﻿
+﻿using Application.Services.AltServices.UserOperationClaimService;
 using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
@@ -8,28 +8,27 @@ namespace Application.Features.UserOperationClaims.Rules
 {
     public class UserOperationClaimBusinessRules
     {
-        private readonly IUserRepository _userRepository;
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
-        private readonly IOperationClaimRepository _operationClaimRepository;
+        private readonly IUserOperationClaimService _userOperationClaimService;
 
-        public UserOperationClaimBusinessRules(IUserRepository userRepository, IUserOperationClaimRepository userOperationClaimRepository, IOperationClaimRepository operationClaimRepository)
+        public UserOperationClaimBusinessRules(IUserOperationClaimRepository userOperationClaimRepository, IUserOperationClaimService userOperationClaimService)
         {
-            _userRepository = userRepository;
             _userOperationClaimRepository = userOperationClaimRepository;
-            _operationClaimRepository = operationClaimRepository;
+            _userOperationClaimService = userOperationClaimService;
         }
 
         public async Task CheckIfUserMailExists(string mail)
         {
-            User? getUser = await _userRepository.GetAsync(u => u.Email == mail);
+            User? getUser = await _userOperationClaimService.GetUserByEmailAsync(mail) ;
             if (getUser == null) throw new BusinessException("Mail Don't Exist.");
         }
 
         public async Task CheckifOperationClaimExists(int claimId)
         {
-            OperationClaim? getOperationClaim = await _operationClaimRepository.GetAsync(op => op.Id == claimId);
+            OperationClaim? getOperationClaim = await _userOperationClaimService.GetOperationClaimById(claimId);
             if (getOperationClaim == null) throw new BusinessException("operation Claim Don't Exist.");
         }
+
         public async Task CheckifUserOperationClaimExists(User? user, int claimId)
         {
             UserOperationClaim? getOperationClaim = await _userOperationClaimRepository.GetAsync(op => op.User == user && op.OperationClaimId == claimId);
@@ -38,7 +37,7 @@ namespace Application.Features.UserOperationClaims.Rules
 
         public async Task CheckifOperationClaimsExists(IList<int> claimIds)
         {
-            IPaginate<OperationClaim> getListOperationClaims = await _operationClaimRepository.GetListAsync(op => claimIds.Contains(op.Id), size: int.MaxValue);
+            IPaginate<OperationClaim> getListOperationClaims = await _userOperationClaimService.GetListOperationClaimsByIds(claimIds);
             if (getListOperationClaims.Count == 0) throw new BusinessException("operation Claims Don't Exist.");
         }
 
@@ -51,6 +50,7 @@ namespace Application.Features.UserOperationClaims.Rules
         {
             if (getUserOC == null) throw new BusinessException("user's claim could not be found");
         }
+
         public void UserOperationClaimsNullCheck(IList<UserOperationClaim?> getUserOCs)
         {
             if (getUserOCs.Count == 0) throw new BusinessException("user's claims could not be found");

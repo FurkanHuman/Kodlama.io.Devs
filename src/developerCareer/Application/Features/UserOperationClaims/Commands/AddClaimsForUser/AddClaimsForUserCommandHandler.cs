@@ -1,5 +1,6 @@
 ﻿using Application.Features.UserOperationClaims.Dtos;
 using Application.Features.UserOperationClaims.Rules;
+using Application.Services.AltServices.UserOperationClaimService;
 using Application.Services.Repositories;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
@@ -10,15 +11,13 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
     public class AddClaimsForUserCommandHandler : IRequestHandler<AddClaimsForUserCommand, AddClaimsForUserDto>
     {
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
-        private readonly IOperationClaimRepository _operationClaimRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserOperationClaimService _userOperationClaimService;
         private readonly UserOperationClaimBusinessRules _userOperationClaimBusinessRules;
 
-        public AddClaimsForUserCommandHandler(IUserOperationClaimRepository userOperationClaimRepository, IOperationClaimRepository operationClaimRepository, IUserRepository userRepository, UserOperationClaimBusinessRules userOperationClaimBusinessRules)
+        public AddClaimsForUserCommandHandler(IUserOperationClaimRepository userOperationClaimRepository, IUserOperationClaimService userOperationClaimService, UserOperationClaimBusinessRules userOperationClaimBusinessRules)
         {
             _userOperationClaimRepository = userOperationClaimRepository;
-            _operationClaimRepository = operationClaimRepository;
-            _userRepository = userRepository;
+            _userOperationClaimService = userOperationClaimService;
             _userOperationClaimBusinessRules = userOperationClaimBusinessRules;
         }
 
@@ -30,26 +29,32 @@ namespace Application.Features.UserOperationClaims.Commands.AddClaimsForUser
 
             await _userOperationClaimBusinessRules.CheckifOperationClaimsExists(request.ClaimIds);
 
-            User getUser = await _userRepository.GetAsync(h => h.Email == request.UserMail);
+            User? getUser = await _userOperationClaimService.GetUserByEmailAsync(request.UserMail);
 
-            IPaginate<OperationClaim> getOperationClaimsForUser = await _operationClaimRepository.GetListAsync(o => request.ClaimIds.Contains(o.Id),size: int.MaxValue);
-
-            IPaginate<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository.GetListAsync(k => k.UserId == getUser.Id, size: int.MaxValue);
-
-            IList<OperationClaim> newOperationClaimForUser = getOperationClaimsForUser.Items.Except(userOperationClaims.Items.Select(y => y.OperationClaim)).ToList();
+            IList<OperationClaim> newOperationClaimForUser = await _userOperationClaimService.GetOperationClaimsOfExistingOnesByUserAndClaimIdsAsync(getUser, request.ClaimIds);
 
             _userOperationClaimBusinessRules.ClaimsIsNull(newOperationClaimForUser);
 
-            foreach (OperationClaim OP in newOperationClaimForUser)
+            await MultipleAdd(userOperationClaimIds, getUser, newOperationClaimForUser);
+
+            return new() { ClaimNames = OperationClaimsToOperationClaimNames(newOperationClaimForUser), Ids = userOperationClaimIds, UserMail = getUser.Email };                                                            
+        }
+
+        private async Task MultipleAdd(IList<Guid> userOperationClaimIds, User? getUser, IList<OperationClaim> newOperationClaimForUser)
+        {
+            foreach (OperationClaim operationClaim in newOperationClaimForUser)
             {
-                UserOperationClaim newUserOperationClaim = new() { UserId = getUser.Id, OperationClaimId = OP.Id };
+                UserOperationClaim newUserOperationClaim = new() { UserId = getUser.Id, OperationClaimId = operationClaim.Id };
 
                 UserOperationClaim addedUserOperationClaim = await _userOperationClaimRepository.AddAsync(newUserOperationClaim);
 
                 userOperationClaimIds.Add(addedUserOperationClaim.Id);
             }
+        }
 
-            return new() { ClaimNames = newOperationClaimForUser.Select(p => p.Name).ToList(), Ids = userOperationClaimIds, UserMail = getUser.Email };
+        private IList<string> OperationClaimsToOperationClaimNames(IList<OperationClaim> operationClaims)
+        {
+            return operationClaims.Select(y => y.Name).ToList();
         }
     }
 }
